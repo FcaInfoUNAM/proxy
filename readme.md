@@ -60,11 +60,21 @@ public class Main {
 ```
 ### 🤔 Preguntas de Análisis
 
-* Carga Perezosa: ¿Cuándo se ejecuta el constructor de RealImage en el código original vs en el código con Proxy?
-* Transparencia: ¿El código cliente necesita saber si está trabajando con un Proxy o con el objeto real? ¿Por qué?
-* Rendimiento: ¿Qué ventajas de rendimiento ofrece el patrón Proxy en este escenario?
-* Control de Acceso: Además de la carga perezosa, ¿qué otros tipos de control podríamos implementar en el Proxy? (Ej: verificación de permisos, logging, cache)
-* Principio SOLID: ¿Qué principio SOLID se aplica aquí al permitir que el Proxy y el RealImage implementen la misma interfaz?
+* Carga Perezosa: ¿Cuándo se ejecuta el constructor de RealImage en el código original vs en el código con Proxy? En el código original se ejecuta desde la creación del objeto, carga la imagen aunque aún no se muestre, en proxy el connstrucotr RelImage s eretrasa hasta la primera vez que se llama display mientras realImage siga en null.
+
+
+* Transparencia: ¿El código cliente necesita saber si está trabajando con un Proxy o con el objeto real? ¿Por qué? No, porque ProxyImage o RealImage implemtan la misma interfaz Image y comparten método, Main los trata igual a la hora de llamarlos.
+
+
+* Rendimiento: ¿Qué ventajas de rendimiento ofrece el patrón Proxy en este escenario? Se evita gasto de tiempo y de memoria cargando im´pagenes que tañ vez nunca se muestren así al arranque se hace de forma más ligera.
+
+
+* Control de Acceso: Además de la carga perezosa, ¿qué otros tipos de control podríamos implementar en el Proxy? (Ej: verificación de permisos, logging, cache) Se pueden revisar permisos de usurio para cargar o mostrarra una imagen, guardado de imágenes ya cargadas en cahcé or dejar registro de logs.
+
+
+* Principio SOLID: ¿Qué principio SOLID se aplica aquí al permitir que el Proxy y el RealImage implementen la misma interfaz?  Sustitución, porque ProxyImage se usa doonde se espera Image sin alterar el funcionamiento esperado por el cliente añadiendo además un control Open/Close.
+
+
 
 ### 🧪 Pruebas a Realizar
 
